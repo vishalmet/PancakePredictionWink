@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HeaderLogo from "./assets/headerlogo.png";
 import Home from "./components/Home";
 import BetBull from "./components/BetBull";
-import BetBeer from "./components/BetBeer";
+import BetBeer from "./components/BetBear";
 import { motion } from "framer-motion";
 import Wallet from "./components/Wallet";
 
@@ -53,7 +53,7 @@ const App = () => {
               {backComponent === "BetBull" && (
                 <BetBull handleFlip={handleFlip} />
               )}
-              {backComponent === "BetBeer" && (
+              {backComponent === "BetBear" && (
                 <BetBeer handleFlip={handleFlip} />
               )}
             </div>
