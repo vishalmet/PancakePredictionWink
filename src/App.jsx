@@ -19,8 +19,8 @@ const App = () => {
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-t from-customStart via-customStart to-blue-950">
       <div className="flex flex-col items-center mx-auto bg-gradient-to-t from-customStart via-customStart to-blue-950 min-h-screen text-white pt-32">
         <div className="flex justify-center">
-          <div className="">
-            <img className="h-12 w-auto mx-auto" src={HeaderLogo} alt="Header Logo" />
+          <div className=" space-y-3">
+            <img className="h-10 w-auto mx-auto" src={HeaderLogo} alt="Header Logo" />
             <Wallet />
           </div>
         </div>
