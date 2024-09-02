@@ -1,31 +1,29 @@
 import React from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { motion } from "framer-motion";
-
 import {
   ConnectButton,
   getDefaultConfig,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import {
-  arbitrumSepolia
-} from "wagmi/chains";
+import { arbitrum, bsc } from "wagmi/chains"; // Import BNB Mainnet
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const config = getDefaultConfig({
   appName: "My RainbowKit App",
   projectId: "YOUR_PROJECT_ID",
-  chains: [arbitrumSepolia],
-  ssr: true, // If your dApp uses server side rendering (SSR)
+  chains: [bsc,arbitrum], // Use BNB Mainnet here
+  ssr: true, // If your dApp uses server-side rendering (SSR)
 });
+
 const queryClient = new QueryClient();
 
 const CustomButton = () => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>
+        <RainbowKitProvider chains={[bsc]}>
           <ConnectButton.Custom>
             {({
               account,
@@ -36,8 +34,6 @@ const CustomButton = () => {
               authenticationStatus,
               mounted,
             }) => {
-              // Note: If your app doesn't use authentication, you
-              // can remove all 'authenticationStatus' checks
               const ready = mounted && authenticationStatus !== "loading";
               const connected =
                 ready &&
@@ -65,15 +61,13 @@ const CustomButton = () => {
                           onClick={openConnectModal}
                           type="button"
                           whileTap={{ scale: 0.9 }}
-
                         >
-                          {" "}
                           Connect Wallet
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            class="size-6 pl-2"
+                            className="size-6 pl-2"
                           >
                             <path d="M2.273 5.625A4.483 4.483 0 0 1 5.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 3H5.25a3 3 0 0 0-2.977 2.625ZM2.273 8.625A4.483 4.483 0 0 1 5.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0 0 18.75 6H5.25a3 3 0 0 0-2.977 2.625ZM5.25 9a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h13.5a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3H15a.75.75 0 0 0-.75.75 2.25 2.25 0 0 1-4.5 0A.75.75 0 0 0 9 9H5.25Z" />
                           </svg>
@@ -88,9 +82,7 @@ const CustomButton = () => {
                           onClick={openChainModal}
                           type="button"
                           whileTap={{ scale: 0.9 }}
-
                         >
-                          {" "}
                           Wrong network
                         </motion.button>
                       );
@@ -104,8 +96,6 @@ const CustomButton = () => {
                           whileTap={{ scale: 0.9 }}
                           type="button"
                         >
-                          {" "}
-                        
                           {account.displayName}
                           {account.displayBalance
                             ? ` (${account.displayBalance})`
