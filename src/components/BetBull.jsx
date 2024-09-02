@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { initializeContract, betBull } from '../integration';
 
 const BetBull = ({ handleFlip }) => {
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [contract, setContract] = useState(null);
   const [value, setValue] = useState("");
   const [showWarning, setShowWarning] = useState(false);
+
+  useEffect(() => {
+    async function initialize() {
+      try {
+        const { provider, signer, address, contract } = await initializeContract();
+        setProvider(provider);
+        setSigner(signer);
+        setAddress(address);
+        setContract(contract);
+      } catch (error) {
+        console.error('Error initializing contract:', error);
+      }
+    }
+    initialize();
+  }, []);
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
@@ -13,6 +33,18 @@ const BetBull = ({ handleFlip }) => {
       setShowWarning(true);
     } else {
       setShowWarning(false);
+    }
+  };
+
+  const handleBetBull = async () => {
+    if (contract && signer && parseFloat(value) >= 0.000000001) {
+      try {
+        await betBull(contract, value);
+      } catch (error) {
+        console.error('Error executing betBull:', error);
+      }
+    } else {
+      console.warn('Invalid bet or contract not initialized');
     }
   };
 
@@ -77,6 +109,7 @@ const BetBull = ({ handleFlip }) => {
             <p className="text-red-500 text-sm">The minimum value should be greater than 0.00001.</p>
           )}
           <motion.button
+            onClick={handleBetBull}
             whileTap={{ scale: 0.9 }}
             className=" bg-green-500 hover:bg-green-600 w-full h-12 rounded-md text-xl font-bold mb-3"
           >
