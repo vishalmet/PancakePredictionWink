@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { betBear } from "../integration";
+import { initializeContract, betBear } from '../integration';
 
-const BetBear = ({ handleFlip }) => {
+const BetBear = ({ handleFlip }) => {  // Correct component name here
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [address, setAddress] = useState(null);
@@ -36,12 +36,12 @@ const BetBear = ({ handleFlip }) => {
     }
   };
 
-  const handleBetBear = async () => {
-    if (contract && signer && parseFloat(value) >= 0.000000001) {
+  const handleBetBear = async () => {  // Ensure this function matches the function being used
+    if (contract && signer && parseFloat(value) >= 0.001) {
       try {
-        await betBear(contract, value);
+        await betBear(value);
       } catch (error) {
-        console.error('Error executing betBull:', error);
+        console.error('Error executing betBear:', error);  // Use the correct function name here
       }
     } else {
       console.warn('Invalid bet or contract not initialized');
