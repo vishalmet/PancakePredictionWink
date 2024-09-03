@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Home = ({ handleFlip }) => {
   return (
     <div>
-      <div className="flex justify-center items-center pt-10">
+      <div className="flex justify-center items-center pt-4">
         <div className="bg-customStart1/10 border-2 border-customStart1/20 shadow-xl h-72 rounded-xl mx-6 md:mx-0 w-[400px] md:w-[500px] space-y-8">
           <div className=" bg-customButtonStroke text-white font-bold text-2xl p-3 flex justify-center rounded-t-xl">
             Pancake Prediction
