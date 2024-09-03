@@ -1,40 +1,95 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { initializeContract, currentEpoch } from '../integration';
 
 const Home = ({ handleFlip }) => {
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [value, setValue] = useState("");
+  const [showWarning, setShowWarning] = useState(false);
+  const [actualEpoch, setActualEpoch] = useState(""); // State for displaying the epoch
+
+  useEffect(() => {
+    async function initialize() {
+      try {
+        const { provider, signer, address, contract } =
+          await initializeContract();
+        setProvider(provider);
+        setSigner(signer);
+        setAddress(address);
+        setContract(contract);
+
+        const epoch = await contract.currentEpoch();
+        setActualEpoch(epoch.toString()); // Convert and set for display
+      } catch (error) {
+        console.error("Error initializing contract:", error);
+      }
+    }
+    initialize();
+  }, []);
+
   return (
     <div>
       <div className="flex justify-center items-center pt-10">
-        <div className="bg-customStart1/10 border-2 border-customStart1/20 shadow-xl h-72 rounded-xl mx-6 md:mx-0 w-[400px] md:w-[500px] space-y-8">
-          <div className=" bg-customButtonStroke text-white font-bold text-2xl p-3 flex justify-center rounded-t-xl">
-            Pancake Prediction
-          </div>
-          <div className=" mx-10">
-            <div className=" flex justify-between font-bold text-xl">
-              <p>Prize Pool:</p>
-              <p>0.0050 BNB</p>
+        <div className="bg-[#27262C] shadow-xl h-full rounded-xl mx-6 md:mx-0 w-[400px] md:w-[500px]">
+          <div className="bg-[#A881FC] text-white font-bold p-2 flex justify-between items-center rounded-t-xl">
+            <div className="flex items-center text-base gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="size-5"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm14.024-.983a1.125 1.125 0 0 1 0 1.966l-5.603 3.113A1.125 1.125 0 0 1 9 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <p>Next</p>
             </div>
-            <div className=" flex justify-center">
-              <div className=" space-y-3 pt-3">
-                <div>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    className="text-white text-xl shadow-blue-950 hover:shadow-2xl w-[280px] md:w-[450px] h-[48px] bg-green-500 font-bold hover:bg-green-600 rounded-xl"
-                    onClick={() => handleFlip("BetBull")}
-                  >
-                    Enter UP
-                  </motion.button>
-                </div>
-                <div>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    className="text-white text-xl shadow-blue-950 hover:shadow-2xl w-[280px] md:w-[450px] h-[48px] bg-red-500 font-bold hover:bg-red-600 rounded-xl"
-                    onClick={() => handleFlip("BetBear")}
-                  >
-                    Enter DOWN
-                  </motion.button>
+            <div className="text-sm">
+              # {actualEpoch}  
+            </div>
+          </div>
+          <div className="p-4">
+            <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[240px] rounded-t-xl mx-auto">
+              <p className="text-[#31D0AA]">UP</p>
+              <p className="text-[#B0A5C9]">2.66x <span className=" font-medium"> payout</span></p>
+            </div>
+            <div className="w-fit mx-auto border border-[#A881FC] py-4 px-6 rounded-xl">
+              <div className="flex justify-between font-bold">
+                <p>Prize Pool:</p>
+                <p>0.0050 BNB</p>
+              </div>
+              <div className="flex justify-center">
+                <div className="space-y-3 pt-3">
+                  <div>
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      className="text-white shadow-blue-950 hover:shadow-2xl w-[280px] h-[48px] bg-[#31D0AA] font-bold rounded-2xl"
+                      onClick={() => handleFlip("BetBull")}
+                    >
+                      Enter UP
+                    </motion.button>
+                  </div>
+                  <div>
+                    <motion.button
+                      whileTap={{ scale: 0.9 }}
+                      className="text-white shadow-blue-950 hover:shadow-2xl w-[280px] h-[48px] bg-[#ED4B9E] font-bold rounded-2xl"
+                      onClick={() => handleFlip("BetBear")}
+                    >
+                      Enter DOWN
+                    </motion.button>
+                  </div>
                 </div>
               </div>
+            </div>
+            <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[240px] rounded-b-xl mx-auto">
+              <p className="text-[#B0A5C9]">1.64x <span className=" font-medium"> payout</span></p>
+              <p className="text-[#ED4B9E]">DOWN</p>
             </div>
           </div>
         </div>
