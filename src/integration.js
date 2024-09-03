@@ -115,10 +115,6 @@ export async function betBear(value) {
   await BetBear.wait();
 }
 
-// export async function betBear(contract) {
-//   const BetBear = await contract.betBear(HARD_CODED_EPOCH, { gasLimit: 500000 });
-//   await BetBear.wait();
-// }
 
 export async function currentEpoch(contract) {
   const epoch = await contract.currentEpoch(); // This might return a BigInt

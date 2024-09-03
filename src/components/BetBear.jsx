@@ -29,7 +29,7 @@ const BetBear = ({ handleFlip }) => {  // Correct component name here
     const inputValue = e.target.value;
     setValue(inputValue);
 
-    if (parseFloat(inputValue) < 0.00001) {
+    if (parseFloat(inputValue) < 0.001) {
       setShowWarning(true);
     } else {
       setShowWarning(false);
