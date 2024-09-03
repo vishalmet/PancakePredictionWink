@@ -78,7 +78,7 @@ export async function betBull(value) {
   console.log("in string", epoch_in_string);
 
   const BetBull = await contract.betBull(epoch_in_string, {
-    value: parsedValue,
+    value: parsedValue
   });
   await BetBull.wait();
 }
