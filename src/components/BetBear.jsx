@@ -54,80 +54,80 @@ const BetBear = ({ handleFlip }) => {
 
   return (
     <div className="flex justify-center items-center pt-10">
-    <div className="bg-[#27262C] shadow-xl h-full rounded-xl mx-6 md:mx-0 w-[400px] md:w-[500px]">
-      <div className="bg-[#3A384C] text-white font-bold p-3 flex justify-between rounded-t-xl">
-        <div className="flex items-center gap-3">
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={() => handleFlip(null)}
-          >
+      <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[400px] md:w-[500px]">
+        <div className="bg-[#3A384C] text-white font-bold p-3 px-5 flex justify-between rounded-t-3xl">
+          <div className="flex items-center gap-3">
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => handleFlip(null)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                />
+              </svg>
+            </motion.button>
+            <p>Set Position</p>
+          </div>
+          {/* <p className="text-sm"># {actualEpoch}</p> */}
+          <div className=" flex items-center bg-[#ED4B9E] p-1 px-3 rounded-lg">
+            DOWN
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6"
+              fill="currentColor"
+              class="size-5"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                fill-rule="evenodd"
+                d="M12 2.25a.75.75 0 0 1 .75.75v16.19l6.22-6.22a.75.75 0 1 1 1.06 1.06l-7.5 7.5a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 1 1 1.06-1.06l6.22 6.22V3a.75.75 0 0 1 .75-.75Z"
+                clip-rule="evenodd"
               />
             </svg>
-          </motion.button>
-          <p>Set Position</p>
+          </div>
         </div>
-        {/* <p className="text-sm"># {actualEpoch}</p> */}
-        <div className=" flex items-center bg-[#ED4B9E] p-1 px-3 rounded-lg">
-          UP
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-5"
+        <div className="mx-5 space-y-2 p-4">
+          <div className=" flex justify-between font-bold text-xl">
+            <p className=" text-[#B0A5C9] font-medium">Commit:</p>
+            <p className=" flex items-center">
+              <img className=" h-8 w-8" src={BNBLogo} alt="" /> BNB
+            </p>
+          </div>
+          <input
+            type="text"
+            placeholder="0.0"
+            value={value}
+            onChange={handleInputChange}
+            className="bg-[#372F47] border font-bold border-customGrayStroke/50 rounded-md w-full h-12 px-3 text-right"
+          />
+          {showWarning && (
+            <p className="text-red-500 text-sm">
+              The minimum value should be greater than 0.0001.
+            </p>
+          )}
+          <motion.button
+            onClick={handleBetBear}
+            whileTap={{ scale: 0.9 }}
+            className=" bg-[#ED4B9E] hover:bg-[#ED4B9E]/80 text-white w-full h-12 rounded-md text-xl font-bold mb-3"
           >
-            <path
-              fill-rule="evenodd"
-              d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
-      </div>
-      <div className="mx-5 space-y-2 p-4">
-        <div className=" flex justify-between font-bold text-xl">
-          <p className=" text-[#B0A5C9] font-medium">Commit:</p>
-          <p className=" flex items-center">
-            <img className=" h-8 w-8" src={BNBLogo} alt="" /> BNB
+            Confirm
+          </motion.button>
+          <p className="text-[#B0A5C9] text-sm font-semibold text-center">
+            You won&apos;t be able to remove or change <br /> your position once
+            you enter it.
           </p>
         </div>
-        <input
-          type="text"
-          placeholder="0.0"
-          value={value}
-          onChange={handleInputChange}
-          className="bg-[#372F47] border font-bold border-customGrayStroke/50 rounded-md w-full h-12 px-3 text-right"
-        />
-        {showWarning && (
-          <p className="text-red-500 text-sm">
-            The minimum value should be greater than 0.0001.
-          </p>
-        )}
-        <motion.button
-          onClick={handleBetBear}
-          whileTap={{ scale: 0.9 }}
-          className=" bg-[#ED4B9E] text-white w-full h-12 rounded-md text-xl font-bold mb-3"
-        >
-          Confirm
-        </motion.button>
-        <p className="text-[#B0A5C9] text-sm font-semibold text-center">
-          You won&apos;t be able to remove or change <br /> your position once
-          you enter it.
-        </p>
       </div>
     </div>
-  </div>
   );
 };
 
