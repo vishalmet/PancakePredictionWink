@@ -5,8 +5,8 @@ import BetBull from "./components/BetBull";
 import BetBeer from "./components/BetBear";
 import { motion } from "framer-motion";
 import Wallet from "./components/Wallet";
-import LiveUp from "./components/LiveUp";
-import LiveDown from "./components/LiveDown";
+// import LiveUp from "./components/LiveUp";
+// import LiveDown from "./components/LiveDown";
 
 const App = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -62,8 +62,8 @@ const App = () => {
           </motion.div>
         </div>
       </div>
-      <LiveUp />
-      <LiveDown />
+      {/* <LiveUp />
+      <LiveDown /> */}
     </div>
   );
 };
