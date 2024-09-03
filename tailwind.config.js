@@ -17,6 +17,9 @@ module.exports = {
         customFontColor: "#D8E4FD",
         customButtonStroke: "#2070F4"
       },
+      boxShadow: {
+        'custom': '0 0 15px 5px rgba(168, 129, 252, 0.3)'
+      }
     },
   },
   variants: {},
