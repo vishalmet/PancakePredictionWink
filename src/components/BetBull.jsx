@@ -39,7 +39,7 @@ const BetBull = ({ handleFlip }) => {
   const handleBetBull = async () => {
     if (contract && signer && parseFloat(value) >= 0.001) {
       try {
-        await betBull(contract, value);
+        await betBull( value);
       } catch (error) {
         console.error('Error executing betBull:', error);
       }
