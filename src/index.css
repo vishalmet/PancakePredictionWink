@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.inter-font {
+    font-family: "Inter";
+  }
