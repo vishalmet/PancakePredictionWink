@@ -5,6 +5,8 @@ import BetBull from "./components/BetBull";
 import BetBeer from "./components/BetBear";
 import { motion } from "framer-motion";
 import Wallet from "./components/Wallet";
+import LiveUp from "./components/LiveUp";
+import LiveDown from "./components/LiveDown";
 
 const App = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -16,7 +18,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#4D4A7B]">
+    <div className="flex-col justify-center items-center min-h-screen bg-[#4D4A7B] inter-font">
       <div className="flex flex-col items-center mx-auto min-h-screen text-white pt-6">
         <div className="flex justify-center">
           <div className=" space-y-3">
@@ -60,6 +62,8 @@ const App = () => {
           </motion.div>
         </div>
       </div>
+      <LiveUp />
+      <LiveDown />
     </div>
   );
 };
