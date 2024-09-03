@@ -57,7 +57,7 @@ const CustomButton = () => {
                     if (!connected) {
                       return (
                         <motion.button
-                          className="text-white w-[350px] md:w-[455px] h-[48px] bg-customBorder border-2 border-customButtonStroke font-bold hover:bg-blue-900 rounded-[32px] flex justify-center items-center"
+                          className="text-white w-[350px] md:w-[455px] h-[48px] bg-[#A881FC] border-2 border-[#A881FC] font-bold hover:bg-[#A881FC]/40 rounded-[32px] flex justify-center items-center"
                           onClick={openConnectModal}
                           type="button"
                           whileTap={{ scale: 0.9 }}
@@ -78,7 +78,7 @@ const CustomButton = () => {
                     if (chain.unsupported) {
                       return (
                         <motion.button
-                          className=" text-white w-[350px] md:w-[455px] h-[48px] bg-customBorder border-2 border-customButtonStroke font-bold hover:bg-blue-900 rounded-[32px]"
+                          className=" text-white w-[350px] md:w-[455px] h-[48px] bg-[#A881FC] border-2 border-[#bg-[#A881FC]] font-bold hover:bg-[#A881FC]/40 rounded-[32px]"
                           onClick={openChainModal}
                           type="button"
                           whileTap={{ scale: 0.9 }}
@@ -91,7 +91,7 @@ const CustomButton = () => {
                     return (
                       <div className="w-[350px] md:w-[455px] h-[48px]">
                         <motion.button
-                          className=" text-white p-2 w-full h-[48px] border-2 border-customButtonStroke font-bold bg-blue-900 rounded-[32px]"
+                          className=" text-white p-2 w-full h-[48px] border-2 border-[#A881FC] font-bold bg-[#A881FC]/40 rounded-[32px]"
                           onClick={openAccountModal}
                           whileTap={{ scale: 0.9 }}
                           type="button"
