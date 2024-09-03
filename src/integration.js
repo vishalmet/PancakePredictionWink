@@ -1,7 +1,11 @@
 import { ethers } from 'ethers';
 import Abi from './abi.json';
 
-const HARD_CODED_EPOCH = 306442; // Hard-coded epoch value
+const HARD_CODED_EPOCH = 306596; // Hard-coded epoch value
+
+const weiValue = "1000000000000000";
+const etherValue = ethers.utils.formatEther(weiValue);
+
 
 // Function to convert BigInt to a JSON-serializable format (string)
 function serializeBigInt(data) {
@@ -54,8 +58,10 @@ export async function getBalance(contract, address) {
   return serializeBigInt(balance); // Ensure the balance is JSON-serializable
 }
 
-export async function betBull(contract) {
-  const BetBull = await contract.betBull(HARD_CODED_EPOCH, { gasLimit: 500000 });
+export async function betBull(contract, value, epoch) {
+  const parsedValue = ethers.utils.parseEther(value);
+  console.log(value, HARD_CODED_EPOCH, etherValue)
+  const BetBull = await contract.betBull(HARD_CODED_EPOCH, {value : parsedValue , gasLimit: 50000 });
   await BetBull.wait();
 }
 
@@ -66,5 +72,6 @@ export async function betBear(contract) {
 
 export async function currentEpoch(contract) {
   const epoch = await contract.currentEpoch(); // This might return a BigInt
-  return serializeBigInt(epoch); // Ensure the epoch is JSON-serializable
+  return serializeBigInt(epoch); 
+  // Ensure the epoch is JSON-serializable
 }

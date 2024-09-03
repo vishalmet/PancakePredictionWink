@@ -37,7 +37,7 @@ const BetBull = ({ handleFlip }) => {
   };
 
   const handleBetBull = async () => {
-    if (contract && signer && parseFloat(value) >= 0.000000001) {
+    if (contract && signer && parseFloat(value) >= 0.001) {
       try {
         await betBull(contract, value);
       } catch (error) {
@@ -106,7 +106,7 @@ const BetBull = ({ handleFlip }) => {
             className="bg-customStart1/10 border font-bold border-customGrayStroke rounded-md w-full h-12 px-3 text-right"
           />
           {showWarning && (
-            <p className="text-red-500 text-sm">The minimum value should be greater than 0.00001.</p>
+            <p className="text-red-500 text-sm">The minimum value should be greater than 0.0001.</p>
           )}
           <motion.button
             onClick={handleBetBull}
