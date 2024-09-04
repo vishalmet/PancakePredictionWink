@@ -33,7 +33,7 @@ const LiveUp = ({ handleFlip }) => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[240px]">
+        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
           <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl border-b-4 border-[#A881FC]">
             <div className="flex items-center text-[#A881FC] text-base gap-1">
               <svg

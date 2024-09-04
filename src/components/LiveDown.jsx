@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { initializeContract, currentEpoch } from "../integration";
 
-const LiveDown = ({ handleFlip }) => {
+const LiveUp = ({ handleFlip }) => {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [address, setAddress] = useState(null);
@@ -33,7 +33,7 @@ const LiveDown = ({ handleFlip }) => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[400px] md:w-[500px]">
+        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[240px]">
           <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl border-b-4 border-[#A881FC]">
             <div className="flex items-center text-[#A881FC] text-base gap-1">
               <svg
@@ -53,21 +53,19 @@ const LiveDown = ({ handleFlip }) => {
             <div className="text-sm text-[#A881FC]"># {actualEpoch}</div>
           </div>
           <div className="p-4">
-            <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[240px] rounded-t-xl mx-auto">
-              <p className="text-lg font-extrabold text-[#31D0AA]">UP</p>
-              <p className="">
+            <div className="font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto">
+              <p className="text-base font-extrabold">UP</p>
+              <p className="text-sm">
                 2.66x <span className=" font-medium"> payout</span>
               </p>
             </div>
-            <div className="w-full md:w-[75%] mx-auto border-2 border-[#ED4B9E] py-4 px-6 rounded-xl">
+            <div className="w-full mx-auto border-2 border-[#31D0AA] p-4 rounded-xl">
               <div className="flex justify-between font-bold">
                 <p className=" text-[#B0A5C9] text-sm">LAST PRICE</p>
               </div>
               <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#ED4B9E] text-2xl border-b-2 border-dotted border-[#B0A5C9]">
-                  $524.180
-                </p>
-                <div className=" flex items-center bg-[#ED4B9E] p-1 px-3 rounded-lg font-semibold">
+                <p className=" font-bold text-[#31D0AA] text-base">$524.180</p>
+                <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -76,29 +74,29 @@ const LiveDown = ({ handleFlip }) => {
                   >
                     <path
                       fill-rule="evenodd"
-                      d="M12 2.25a.75.75 0 0 1 .75.75v16.19l6.22-6.22a.75.75 0 1 1 1.06 1.06l-7.5 7.5a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 1 1 1.06-1.06l6.22 6.22V3a.75.75 0 0 1 .75-.75Z"
+                      d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
                       clip-rule="evenodd"
                     />
                   </svg>
                   $0.3214
                 </div>
               </div>
-              <div className="pt-4">
-                <div className=" flex justify-between items-center text-sm">
-                  <p>Locked Price: </p>
-                  <p>$523.8026</p>
+              <div className="pt-2">
+                <div className=" flex justify-between items-center text-xs">
+                    <p>Locked Price: </p>
+                    <p>$523.8026</p>
                 </div>
-                <div className=" flex justify-between items-center font-bold">
-                  <p>Price Pool: </p>
-                  <p>2.7793 BNB</p>
+                <div className=" flex justify-between items-center font-bold text-sm">
+                    <p>Price Pool: </p>
+                    <p>2.7793 BNB</p>
                 </div>
               </div>
             </div>
-            <div className=" text-base font-bold text-center p-1 bg-[#ED4B9E] w-[240px] rounded-b-xl mx-auto">
-              <p className="">
+            <div className="font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto">
+              <p className="text-[#B0A5C9] text-sm">
                 1.64x <span className=" font-medium"> payout</span>
               </p>
-              <p className="">DOWN</p>
+              <p className="text-[#ED4B9E] text-base">DOWN</p>
             </div>
           </div>
         </div>
@@ -107,4 +105,4 @@ const LiveDown = ({ handleFlip }) => {
   );
 };
 
-export default LiveDown;
+export default LiveUp;
