@@ -61,7 +61,7 @@ const BetBull = ({ handleFlip }) => {
     <div className="flex justify-center items-center pt-10">
       <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[280px]">
         <div className="bg-[#3A384C] text-white font-bold p-3 px-5 flex justify-between rounded-t-3xl">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => handleFlip(null)}
@@ -123,7 +123,7 @@ const BetBull = ({ handleFlip }) => {
           <motion.button
             onClick={handleBetBull}
             whileTap={{ scale: 0.9 }}
-            className=" bg-[#31D0AA] hover:bg-[#31D0AA]/80 text-white w-full h-12 rounded-md text-xl font-bold mb-3"
+            className=" bg-[#31D0AA] hover:bg-[#31D0AA]/80 text-white w-full h-[40px] text-base rounded-md font-bold mb-3"
           >
             Confirm
           </motion.button>
