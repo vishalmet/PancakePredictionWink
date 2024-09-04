@@ -33,7 +33,7 @@ const LiveUp = ({ handleFlip }) => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[280px]">
+        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[240px]">
           <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl border-b-4 border-[#A881FC]">
             <div className="flex items-center text-[#A881FC] text-base gap-1">
               <svg
@@ -53,7 +53,7 @@ const LiveUp = ({ handleFlip }) => {
             <div className="text-sm text-[#A881FC]"># {actualEpoch}</div>
           </div>
           <div className="p-4">
-            <div className="font-bold text-center p-1 bg-[#31D0AA] w-[200px] rounded-t-xl mx-auto">
+            <div className="font-bold text-center p-1 bg-[#31D0AA] w-[140px] rounded-t-xl mx-auto">
               <p className="text-base font-extrabold">UP</p>
               <p className="text-sm">
                 2.66x <span className=" font-medium"> payout</span>
@@ -64,8 +64,8 @@ const LiveUp = ({ handleFlip }) => {
                 <p className=" text-[#B0A5C9] text-sm">LAST PRICE</p>
               </div>
               <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#31D0AA] text-xl">$524.180</p>
-                <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold">
+                <p className=" font-bold text-[#31D0AA] text-base">$524.180</p>
+                <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -81,18 +81,18 @@ const LiveUp = ({ handleFlip }) => {
                   $0.3214
                 </div>
               </div>
-              <div className="pt-4">
-                <div className=" flex justify-between items-center text-sm">
+              <div className="pt-2">
+                <div className=" flex justify-between items-center text-xs">
                     <p>Locked Price: </p>
                     <p>$523.8026</p>
                 </div>
-                <div className=" flex justify-between items-center font-bold">
+                <div className=" flex justify-between items-center font-bold text-sm">
                     <p>Price Pool: </p>
                     <p>2.7793 BNB</p>
                 </div>
               </div>
             </div>
-            <div className="font-bold text-center p-1 bg-[#353547] w-[200px] rounded-b-xl mx-auto">
+            <div className="font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto">
               <p className="text-[#B0A5C9] text-sm">
                 1.64x <span className=" font-medium"> payout</span>
               </p>
