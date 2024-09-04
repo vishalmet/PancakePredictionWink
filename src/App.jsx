@@ -5,8 +5,8 @@ import BetBull from "./components/BetBull";
 import BetBeer from "./components/BetBear";
 import { motion } from "framer-motion";
 import Wallet from "./components/Wallet";
-// import LiveUp from "./components/LiveUp";
-// import LiveDown from "./components/LiveDown";
+import LiveUp from "./components/LiveUp";
+import LiveDown from "./components/LiveDown";
 
 const App = () => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -26,7 +26,9 @@ const App = () => {
             <Wallet />
           </div>
         </div>
-        <div className="relative w-[400px] md:w-[500px] perspective">
+        <div className=" flex gap-4">
+          <LiveUp />
+        <div className="relative w-[280px] perspective">
           <motion.div
             className="relative w-full h-full"
             style={{ transformStyle: "preserve-3d" }}
@@ -60,10 +62,11 @@ const App = () => {
               )}
             </div>
           </motion.div>
+          </div>
         </div>
       </div>
-      {/* <LiveUp />
-      <LiveDown /> */}
+      <LiveUp />
+      <LiveDown />
     </div>
   );
 };
