@@ -55,8 +55,8 @@ const BetBear = ({ handleFlip }) => {
   return (
     <div className="flex justify-center items-center pt-10">
       <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[280px]">
-        <div className="bg-[#3A384C] text-white font-bold p-3 px-5 flex justify-between rounded-t-3xl">
-          <div className="flex items-center gap-1">
+        <div className="bg-[#3A384C] text-white font-bold p-3 flex justify-between rounded-t-3xl">
+          <div className="flex items-center gap-1 text-sm">
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => handleFlip(null)}
@@ -67,7 +67,7 @@ const BetBear = ({ handleFlip }) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="size-6"
+                className="size-4"
               >
                 <path
                   strokeLinecap="round"
@@ -79,7 +79,7 @@ const BetBear = ({ handleFlip }) => {
             <p>Set Position</p>
           </div>
           {/* <p className="text-sm"># {actualEpoch}</p> */}
-          <div className=" flex items-center bg-[#ED4B9E] p-1 px-3 rounded-lg">
+          <div className=" flex items-center bg-[#ED4B9E] p-1 px-3 rounded-lg text-xs">
             DOWN
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const BetBear = ({ handleFlip }) => {
           </div>
         </div>
         <div className="space-y-2 p-4">
-          <div className=" flex justify-between font-bold text-xl">
+          <div className=" flex justify-between font-bold text-lg">
             <p className=" text-[#B0A5C9] font-medium">Commit:</p>
             <p className=" flex items-center">
               <img className=" h-8 w-8" src={BNBLogo} alt="" /> BNB
