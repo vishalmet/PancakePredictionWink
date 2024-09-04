@@ -59,7 +59,7 @@ const BetBull = ({ handleFlip }) => {
 
   return (
     <div className="flex justify-center items-center pt-10">
-      <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[400px] md:w-[500px]">
+      <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[280px]">
         <div className="bg-[#3A384C] text-white font-bold p-3 px-5 flex justify-between rounded-t-3xl">
           <div className="flex items-center gap-3">
             <motion.button
@@ -100,7 +100,7 @@ const BetBull = ({ handleFlip }) => {
             </svg>
           </div>
         </div>
-        <div className="mx-5 space-y-2 p-4">
+        <div className=" space-y-2 p-4">
           <div className=" flex justify-between font-bold text-xl">
             <p className=" text-[#B0A5C9] font-medium">Commit:</p>
             <p className=" flex items-center">
@@ -127,8 +127,8 @@ const BetBull = ({ handleFlip }) => {
           >
             Confirm
           </motion.button>
-          <p className="text-[#B0A5C9] text-sm font-semibold text-center">
-            You won&apos;t be able to remove or change <br /> your position once
+          <p className="text-[#B0A5C9] text-xs font-semibold text-center">
+            You won&apos;t be able to remove or change your position once
             you enter it.
           </p>
         </div>
