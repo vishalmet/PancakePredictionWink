@@ -33,7 +33,7 @@ const Home = ({ handleFlip }) => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h- rounded-3xl mx-6 md:mx-0 w-[280px]">
+        <div className="bg-[#27262C] shadow-xl h- rounded-3xl mx-6 md:mx-0 w-[240px]">
           <div className="bg-[#A881FC] text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl">
             <div className="flex items-center text-base gap-1">
               <svg
@@ -55,11 +55,11 @@ const Home = ({ handleFlip }) => {
             </div>
           </div>
           <div className="p-4">
-            <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[200px] rounded-t-xl mx-auto">
+            <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[140px] rounded-t-xl mx-auto">
               <p className="text-[#31D0AA] text-base font-extrabold">UP</p>
               <p className="text-[#B0A5C9] text-xs">2.66x <span className=" font-medium"> payout</span></p>
             </div>
-            <div className="w-full mx-auto border-2 border-[#A881FC] py-4 px-6 rounded-xl">
+            <div className="w-full mx-auto border-2 border-[#A881FC] p-4 rounded-xl">
               <div className="flex justify-between font-bold text-sm">
                 <p>Prize Pool:</p>
                 <p>0.0050 BNB</p>
@@ -69,7 +69,7 @@ const Home = ({ handleFlip }) => {
                   <div className=" flex justify-center">
                     <motion.button
                       whileTap={{ scale: 0.9 }}
-                      className="text-white shadow-blue-950 hover:shadow-2xl w-[200px] h-[40px] bg-[#31D0AA] hover:bg-[#31D0AA]/80 font-bold rounded-xl"
+                      className="text-white shadow-blue-950 hover:shadow-2xl w-[170px] h-[40px] bg-[#31D0AA] hover:bg-[#31D0AA]/80 font-bold rounded-xl"
                       onClick={() => handleFlip("BetBull")}
                     >
                       Enter UP
@@ -78,7 +78,7 @@ const Home = ({ handleFlip }) => {
                   <div className=" flex justify-center">
                     <motion.button
                       whileTap={{ scale: 0.9 }}
-                      className="text-white shadow-blue-950 hover:shadow-2xl w-[200px] h-[40px] bg-[#ED4B9E] hover:bg-[#ED4B9E]/80 font-bold rounded-xl"
+                      className="text-white shadow-blue-950 hover:shadow-2xl w-[170px] h-[40px] bg-[#ED4B9E] hover:bg-[#ED4B9E]/80 font-bold rounded-xl"
                       onClick={() => handleFlip("BetBear")}
                     >
                       Enter DOWN
@@ -87,7 +87,7 @@ const Home = ({ handleFlip }) => {
                 </div>
               </div>
             </div>
-            <div className="font-bold text-center p-1 bg-[#353547] w-[200px] rounded-b-xl mx-auto">
+            <div className="font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto">
               <p className="text-[#B0A5C9] text-xs">1.64x <span className=" font-medium"> payout</span></p>
               <p className="text-[#ED4B9E] text-base font-extrabold">DOWN</p>
             </div>
