@@ -30,7 +30,7 @@ const App = () => {
             <Wallet />
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 mr-2">
           <LiveUp />
           <div className="relative w-[240px] perspective">
             <motion.div
