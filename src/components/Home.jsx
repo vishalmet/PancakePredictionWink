@@ -33,7 +33,7 @@ const Home = ({ handleFlip }) => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl mx-6 md:mx-0 w-[280px]">
+        <div className="bg-[#27262C] shadow-xl h- rounded-3xl mx-6 md:mx-0 w-[280px]">
           <div className="bg-[#A881FC] text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl">
             <div className="flex items-center text-base gap-1">
               <svg
@@ -69,7 +69,7 @@ const Home = ({ handleFlip }) => {
                   <div className=" flex justify-center">
                     <motion.button
                       whileTap={{ scale: 0.9 }}
-                      className="text-white shadow-blue-950 hover:shadow-2xl w-[200px] h-[40px] bg-[#31D0AA] hover:bg-[#31D0AA]/80 font-bold rounded-2xl"
+                      className="text-white shadow-blue-950 hover:shadow-2xl w-[200px] h-[40px] bg-[#31D0AA] hover:bg-[#31D0AA]/80 font-bold rounded-xl"
                       onClick={() => handleFlip("BetBull")}
                     >
                       Enter UP
@@ -78,7 +78,7 @@ const Home = ({ handleFlip }) => {
                   <div className=" flex justify-center">
                     <motion.button
                       whileTap={{ scale: 0.9 }}
-                      className="text-white shadow-blue-950 hover:shadow-2xl w-[200px] h-[40px] bg-[#ED4B9E] hover:bg-[#ED4B9E]/80 font-bold rounded-2xl"
+                      className="text-white shadow-blue-950 hover:shadow-2xl w-[200px] h-[40px] bg-[#ED4B9E] hover:bg-[#ED4B9E]/80 font-bold rounded-xl"
                       onClick={() => handleFlip("BetBear")}
                     >
                       Enter DOWN
