@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { initializeContract, currentEpoch } from "../integration";
-
+import usePriceData from "../hooks/usePriceData";
 const LiveUp = ({ handleFlip }) => {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
@@ -10,6 +10,17 @@ const LiveUp = ({ handleFlip }) => {
   const [value, setValue] = useState("");
   const [showWarning, setShowWarning] = useState(false);
   const [actualEpoch, setActualEpoch] = useState(""); // State for displaying the epoch
+  const { data, refetch, isFetching, error } = usePriceData();
+
+
+  const formatPrice = (price) => {
+    // Convert price to a number if it's not already
+    const priceNum = Number(price);
+
+    // Format price to have a decimal point, e.g., 504.30606593
+    if (isNaN(priceNum)) return 'No data available';
+    return (priceNum / 1e9).toFixed(8); // Assuming the data is in nanounits and needs division by 1e9
+};
 
   useEffect(() => {
     async function initialize() {
@@ -64,7 +75,7 @@ const LiveUp = ({ handleFlip }) => {
                 <p className=" text-[#B0A5C9] text-sm">LAST PRICE</p>
               </div>
               <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#31D0AA] text-base">$524.180</p>
+                <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(data)}</p>
                 <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

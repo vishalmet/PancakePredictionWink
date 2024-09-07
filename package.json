@@ -10,13 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pancakeswap/chains": "^0.4.6",
+    "@pancakeswap/wagmi": "^3.0.2",
+    "@pythnetwork/pyth-evm-js": "^1.66.0",
     "@rainbow-me/rainbowkit": "^2.0.2",
     "@tanstack/react-query": "^5.48.0",
+    "bignumber.js": "^9.1.2",
     "ethers": "^5.7.2",
     "framer-motion": "^11.3.31",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "viem": "^2.8.10",
+    "view": "^1.1.1",
     "wagmi": "^2.5.7",
     "web3": "^4.12.1"
   },

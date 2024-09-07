@@ -114,6 +114,29 @@ export async function betBear(value) {
   });
   await BetBear.wait();
 }
+export async function getRound(value) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []); // Request access to MetaMask accounts
+
+  const signer = provider.getSigner(); // Get the signer from the provider
+  const address = await signer.getAddress(); // Get the address from the signer
+
+  const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
+  const contract = new ethers.Contract(ContractAddress, Abi, signer);
+
+  console.log("instance", contract);
+
+
+
+
+
+
+
+  const roundvalues = await contract.rounds(value)
+  await roundvalues.wait();
+
+  return roundvalues;
+}
 
 
 export async function currentEpoch(contract) {

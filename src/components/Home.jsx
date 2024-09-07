@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { initializeContract, currentEpoch } from '../integration';
+import BN from 'bignumber.js'
 
 const Home = ({ handleFlip }) => {
   const [provider, setProvider] = useState(null);
@@ -10,7 +11,36 @@ const Home = ({ handleFlip }) => {
   const [value, setValue] = useState("");
   const [showWarning, setShowWarning] = useState(false);
   const [actualEpoch, setActualEpoch] = useState(""); // State for displaying the epoch
+const [totalVal, setTotalVal] = useState("")
 
+
+const [upval, setupval] = useState("")
+const [downVal, setDownVal] = useState("")
+const getMultiplierV2 = (total, amount) => {
+  if (!total) {
+    return 0
+  }
+
+  if (total === 0n || amount === 0n) {
+    return 0
+  }
+
+  const rewardAmountFixed = new BN(total.toString())
+  const multiplierAmountFixed = new BN(amount.toString())
+
+  return rewardAmountFixed.div(multiplierAmountFixed)
+}
+
+
+
+const formatPrice = (price) => {
+  // Convert price to a number if it's not already
+  const priceNum = Number(price);
+
+  // Format price to have a decimal point, e.g., 504.30606593
+  if (isNaN(priceNum)) return 'No data available';
+  return (priceNum / 1e18).toFixed(4); // Assuming the data is in nanounits and needs division by 1e9
+};
   useEffect(() => {
     async function initialize() {
       try {
@@ -23,6 +53,39 @@ const Home = ({ handleFlip }) => {
 
         const epoch = await contract.currentEpoch();
         setActualEpoch(epoch.toString()); 
+const epoch_in_string= epoch.toString();
+        const rounds = await contract.rounds(epoch_in_string);
+
+        console.log("rounds",rounds);
+
+        const totslval= rounds["totalAmount"];
+        const pricepool= rounds["totalAmount"];
+
+        console.log("rota",totslval);
+        console.log("rota in sigsdf",totslval.toString());
+
+        const  val = formatPrice(totslval.toString())
+
+        console.log("val",val);
+setTotalVal(val)
+
+const ba = rounds["bullAmount"];
+const bearamoint = rounds["bearAmount"];
+const bullMultiplier = pricepool && ba ? getMultiplierV2(pricepool, ba) : 0
+const bearMultiplier = pricepool && bearamoint ? getMultiplierV2(pricepool, bearamoint) : 0
+
+
+const formattedBullMultiplier = bullMultiplier.toFixed(bullMultiplier.isZero() ? 0 : 2)
+const formattedBearMultiplier = bearMultiplier.toFixed(bearMultiplier.isZero() ? 0 : 2)
+
+
+console.log("bear", formattedBearMultiplier);
+console.log("bull", formattedBullMultiplier);
+
+
+setupval(formattedBullMultiplier)
+
+setDownVal(formattedBearMultiplier)
       } catch (error) {
         console.error("Error initializing contract:", error);
       }
@@ -57,12 +120,12 @@ const Home = ({ handleFlip }) => {
           <div className="p-4">
             <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[140px] rounded-t-xl mx-auto">
               <p className="text-[#31D0AA] text-base font-extrabold">UP</p>
-              <p className="text-[#B0A5C9] text-xs">2.66x <span className=" font-medium"> payout</span></p>
+              <p className="text-[#B0A5C9] text-xs">{upval}x <span className=" font-medium"> payout</span></p>
             </div>
             <div className="w-full mx-auto border-2 border-[#A881FC] p-4 rounded-xl">
               <div className="flex justify-between font-bold text-sm">
                 <p>Prize Pool:</p>
-                <p>0.0050 BNB</p>
+                <p>{totalVal} BNB</p>
               </div>
               <div className="flex justify-center">
                 <div className="space-y-3 pt-3 text-sm">
@@ -88,7 +151,7 @@ const Home = ({ handleFlip }) => {
               </div>
             </div>
             <div className="font-bold text-center p-1 bg-[#353547] w-[140px] rounded-b-xl mx-auto">
-              <p className="text-[#B0A5C9] text-xs">1.64x <span className=" font-medium"> payout</span></p>
+              <p className="text-[#B0A5C9] text-xs">{downVal}x <span className=" font-medium"> payout</span></p>
               <p className="text-[#ED4B9E] text-base font-extrabold">DOWN</p>
             </div>
           </div>
