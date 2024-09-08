@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@pancakeswap/chains": "^0.4.6",
+    "@pancakeswap/uikit": "^0.64.0",
     "@pancakeswap/wagmi": "^3.0.2",
     "@pythnetwork/pyth-evm-js": "^1.66.0",
     "@rainbow-me/rainbowkit": "^2.0.2",

@@ -4,6 +4,8 @@ import { initializeContract, currentEpoch } from "../integration";
 import usePriceData from "../hooks/usePriceData";
 import BN from 'bignumber.js'
 import usePollOraclePrice from "../hooks/usePollOraclePrice";
+// import { Progress, ProgressProps } from '@pancakeswap/uikit'
+import RoundProgress from "./RoundProgress";
 
 const BetPosition = {
   BULL : 'Bull',
@@ -112,9 +114,10 @@ const getPriceDifference = (price , lockPrice) => {
 }
 const [closeTimestamp, setCloseTimestamp] = useState()
 
-const reff1 = setTimeout(() => {
-  refresh()
-}, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 5000)
+const [lockTimestamp, setLockTimestamp] = useState()
+// const reff1 = setTimeout(() => {
+//   refresh()
+// }, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 5000)
 
   useEffect(() => {
     async function initialize() {
@@ -142,9 +145,10 @@ const reff1 = setTimeout(() => {
 setLockpriceActual(totslval)
 
         const closeTimestamp = rounds["closeTimestamp"];
+        const lockTimestamp = rounds["closeTimestamp"];
 
         setCloseTimestamp(closeTimestamp)
-
+setLockTimestamp(lockTimestamp)
 
         const r = formatPrice3(pricepool.toString())
 seTpricepool(r);
@@ -217,7 +221,14 @@ setDownVal(formattedBearMultiplier)
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
         <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
-          <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl border-b-4 border-[#A881FC]">
+          <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-4xl  border-[#A881FC]">
+
+          {/* <RoundProgress
+        variant="flat"
+        scale="sm"
+        lockTimestamp={lockTimestamp ?? 0}
+        closeTimestamp={closeTimestamp ?? 0}
+      /> */}
             <div className="flex items-center text-[#A881FC] text-base gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
