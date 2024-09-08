@@ -1,6 +1,5 @@
 import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js'
 import { useQuery } from '@tanstack/react-query'
-import { Address } from 'viem'
 
 
 export const useGaletoOraclePrice = ({ address, enabled }) => {

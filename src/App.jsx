@@ -11,11 +11,20 @@ import LiveDown from "./components/LiveDown";
 import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js'
 import { useQuery } from '@tanstack/react-query'
 import { useQueryClient } from '@tanstack/react-query'
+import { WagmiProvider } from 'wagmi'
 
 import { createContext, useContext } from 'react'
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import Comp from "./Comp";
+import { http, createConfig } from 'wagmi'
+import { bsc} from 'wagmi/chains'
 
+export const config = createConfig({
+  chains: [bsc],
+  transports: {
+    [bsc.id]: http(),
+  },
+})
 // const ConfigContext = createContext<PredictionConfig | undefined>(undefined)
 
 // function useConfig() {
@@ -55,6 +64,7 @@ const App = () => {
     },
   })
   return (
+    <WagmiProvider config={config}>
   <QueryClientProvider client={queryClient} >
     <div className="flex-col justify-center items-center min-h-screen bg-[#4D4A7B] inter-font">
       <div className="flex flex-col items-center mx-auto min-h-screen text-white pt-6">
@@ -112,6 +122,7 @@ const App = () => {
 
     <Comp />
     </QueryClientProvider>
+    </WagmiProvider>
   );
 };
 

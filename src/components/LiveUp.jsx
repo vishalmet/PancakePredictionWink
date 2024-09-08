@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { initializeContract, currentEpoch } from "../integration";
 import usePriceData from "../hooks/usePriceData";
 import BN from 'bignumber.js'
+import usePollOraclePrice from "../hooks/usePollOraclePrice";
 
+const BetPosition = {
+  BULL : 'Bull',
+  BEAR : 'Bear',
+  HOUSE : 'House',
+}
 const LiveUp = ({ handleFlip }) => {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
@@ -18,7 +24,36 @@ const LiveUp = ({ handleFlip }) => {
 
   const [upval, setupval] = useState("")
   const [downVal, setDownVal] = useState("")
+
+  const [lockpriceActual, setLockpriceActual] = useState()
+
+  const [realprice, setRealprice] = useState("")
   const { data, refetch, isFetching, error } = usePriceData();
+
+  const config ={
+    "address": "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA",
+    "api": "https://thegraph.pancakeswap.com/prediction-v2-bsc",
+    "chainlinkOracleAddress": "0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE",
+    "displayedDecimals": 4,
+    "isNativeToken": true,
+    "token": {
+      "chainId": 56,
+      "decimals": 18,
+      "symbol": "BNB",
+      "name": "Binance Chain Native Token",
+      "isNative": true
+    },
+    "tokenBackgroundColor": "#F0B90B"
+  }
+
+  const { price, refresh } = usePollOraclePrice({
+    chainlinkOracleAddress: config?.chainlinkOracleAddress,
+    galetoOracleAddress: config?.galetoOracleAddress,
+  })
+
+  console.log("price",price);
+
+  // setRealprice(price.toString())
   const formatPrice = (price) => {
     // Convert price to a number if it's not already
     const priceNum = Number(price);
@@ -62,6 +97,27 @@ const getMultiplierV2 = (total, amount) => {
 }
 
 
+const REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE = 2
+
+const SHOW_HOUSE_BEFORE_SECONDS_TO_CLOSE = 20
+const [isCalculatingPhase, setIsCalculatingPhase] = useState(false)
+
+const getPriceDifference = (price , lockPrice) => {
+
+  console.log("rpice",price);
+  console.log("lockcprice",lockPrice);
+  if (!price || !lockPrice) {
+    return 0
+  }
+
+  return price - lockPrice
+}
+const [closeTimestamp, setCloseTimestamp] = useState()
+
+const reff1 = setTimeout(() => {
+  refresh()
+}, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
+
   useEffect(() => {
     async function initialize() {
       try {
@@ -86,6 +142,11 @@ const getMultiplierV2 = (total, amount) => {
 
         const ba = rounds["bullAmount"];
         const bearamoint = rounds["bearAmount"];
+setLockpriceActual(totslval)
+
+        const closeTimestamp = rounds["closeTimestamp"];
+
+        setCloseTimestamp(closeTimestamp)
 
         console.log("pricepool", pricepool.toString());
 
@@ -119,14 +180,47 @@ setupval(formattedBullMultiplier)
 setDownVal(formattedBearMultiplier)
 
 console.log("data",data);
-console.log("lockprice", lockPrice);
-console.log("opdsvdsvsd", formatPrice(data)-lockPrice);
+console.log("lockprice", val);
+console.log("formateddata",formatPrice(data));
+
+console.log("opdsvdsvsd", formatPrice(data)-val);
       } catch (error) {
         console.error("Error initializing contract:", error);
       }
     }
     initialize();
-  }, []);
+  });
+  const getNowInSeconds = () => Math.floor(Date.now() / 1000)
+
+  const isHouse = useMemo(() => {
+    const secondsToClose = closeTimestamp ? closeTimestamp - getNowInSeconds() : 0
+    return Boolean(lockpriceActual && price === lockpriceActual && secondsToClose <= SHOW_HOUSE_BEFORE_SECONDS_TO_CLOSE)
+  }, [closeTimestamp, lockPrice, price])
+  
+  const isBull = Boolean(lockPrice && price > lockPrice)
+  
+  const betPosition = isHouse ? BetPosition.HOUSE : isBull ? BetPosition.BULL : BetPosition.BEAR
+  
+  const priceDifference = getPriceDifference(Number(price), lockpriceActual ?? 0)
+  // const hasRoundFailed = getHasRoundFailed(round.oracleCalled, round.closeTimestamp, bufferSeconds, round.closePrice)
+  useEffect(() => {
+    const secondsToClose = closeTimestamp ? closeTimestamp - getNowInSeconds() : 0
+    if (secondsToClose > 0) {
+      const refreshPriceTimeout = setTimeout(() => {
+        refresh()
+      }, (secondsToClose - REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
+
+      const calculatingPhaseTimeout = setTimeout(() => {
+        setIsCalculatingPhase(true)
+      }, secondsToClose * 1000)
+
+      return () => {
+        clearTimeout(refreshPriceTimeout)
+        clearTimeout(calculatingPhaseTimeout)
+      }
+    }
+    return undefined
+  }, [refresh, closeTimestamp])
 
   return (
     <div>
@@ -161,8 +255,11 @@ console.log("opdsvdsvsd", formatPrice(data)-lockPrice);
               <div className="flex justify-between font-bold">
                 <p className=" text-[#B0A5C9] text-sm">LAST PRICE</p>
               </div>
+
               <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(data)}</p>
+                <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(price)}</p>
+
+                {/* <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(realprice)}</p> */}
                 <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +273,7 @@ console.log("opdsvdsvsd", formatPrice(data)-lockPrice);
                       clip-rule="evenodd"
                     />
                   </svg>
-                  $0.3214
+           {formatPrice(priceDifference)}
                 </div>
               </div>
               <div className="pt-2">

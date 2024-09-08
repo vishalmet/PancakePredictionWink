@@ -1,17 +1,17 @@
 import { ChainId } from '@pancakeswap/chains'
 import { useReadContract } from '@pancakeswap/wagmi'
-import { chainlinkOracleABI } from '../abis/oracleabi.js'
+import { chainlinkOracleABI } from '../abis/oracleabi'
+// import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useMemo } from 'react'
-import { Address } from 'viem'
-import { useGaletoOraclePrice } from './useGaletoOraclePrice.js'
+import { useGaletoOraclePrice } from './useGaletoOraclePrice'
 
 
 
 const usePollOraclePrice = ({ chainlinkOracleAddress, galetoOracleAddress }) => {
-  const  chainId  = ChainId.BSC
-
+  // const { chainId } = useActiveChainId()
+const chainId = 56;
   const shouldFetchGaletoPrice = useMemo(
-    () => Boolean(galetoOracleAddress && chainId === ChainId.BSC),
+    () => Boolean(galetoOracleAddress && chainId === ChainId.ZKSYNC),
     [galetoOracleAddress, chainId],
   )
 
