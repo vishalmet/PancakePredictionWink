@@ -31,6 +31,7 @@ const getMultiplierV2 = (total, amount) => {
   return rewardAmountFixed.div(multiplierAmountFixed)
 }
 
+const REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE = 1;
 
 
 const formatPrice = (price) => {
@@ -41,32 +42,28 @@ const formatPrice = (price) => {
   if (isNaN(priceNum)) return 'No data available';
   return (priceNum / 1e18).toFixed(4); // Assuming the data is in nanounits and needs division by 1e9
 };
-  useEffect(() => {
-    async function initialize() {
-      try {
-        const { provider, signer, address, contract } =
-          await initializeContract();
-        setProvider(provider);
-        setSigner(signer);
-        setAddress(address);
-        setContract(contract);
 
-        const epoch = await contract.currentEpoch();
-        setActualEpoch(epoch.toString()); 
+async function initialize() {
+  try {
+    const { provider, signer, address, contract } =
+      await initializeContract();
+    setProvider(provider);
+    setSigner(signer);
+    setAddress(address);
+    setContract(contract);
+
+    const epoch = await contract.currentEpoch();
+    setActualEpoch(epoch.toString()); 
 const epoch_in_string= epoch.toString();
-        const rounds = await contract.rounds(epoch_in_string);
+    const rounds = await contract.rounds(epoch_in_string);
 
-        console.log("rounds",rounds);
 
-        const totslval= rounds["totalAmount"];
-        const pricepool= rounds["totalAmount"];
+    const totslval= rounds["totalAmount"];
+    const pricepool= rounds["totalAmount"];
 
-        console.log("rota",totslval);
-        console.log("rota in sigsdf",totslval.toString());
+  
+    const  val = formatPrice(totslval.toString())
 
-        const  val = formatPrice(totslval.toString())
-
-        console.log("val",val);
 setTotalVal(val)
 
 const ba = rounds["bullAmount"];
@@ -79,19 +76,28 @@ const formattedBullMultiplier = bullMultiplier.toFixed(bullMultiplier.isZero() ?
 const formattedBearMultiplier = bearMultiplier.toFixed(bearMultiplier.isZero() ? 0 : 2)
 
 
-console.log("bear", formattedBearMultiplier);
-console.log("bull", formattedBullMultiplier);
+
 
 
 setupval(formattedBullMultiplier)
 
 setDownVal(formattedBearMultiplier)
-      } catch (error) {
-        console.error("Error initializing contract:", error);
-      }
-    }
+  } catch (error) {
+    console.error("Error initializing contract:", error);
+  }
+}
+
+const reff1 = setTimeout(() => {
+  initialize()
+}, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
+
+
+
+  useEffect(() => {
+  
     initialize();
   }, []);
+
 
   return (
     <div>

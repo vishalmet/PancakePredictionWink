@@ -10,11 +10,9 @@ const Comp = () => {
     
         queryFn: async () => {
           const connection = new EvmPriceServiceConnection('https://hermes.pyth.network', { verbose: true })
-console.log("conn",connection);
 setfirst(connection)
           const priceIds = ["0x2f95862b045670cd22bee3114c39763a4a08beeb663b145d283c31d7d1101c4f"]
           const result = (await connection.getLatestPriceFeeds(priceIds )) 
-    console.log("reaa",result);
           return result?.[0]?.price?.price ?? 0n
         },
     
@@ -22,13 +20,10 @@ setfirst(connection)
         enabled: Boolean(true),
       })
     
-    console.log("data",data);
 
 
     useEffect(()=>{
-console.log("data",data);
 
-console.log("Asd",first);
 
     },[first])
   return (

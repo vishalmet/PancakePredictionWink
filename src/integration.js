@@ -32,12 +32,10 @@ export async function initializeContract() {
       // Fetch the chain ID using the recommended method
       const chainId = await provider.send("eth_chainId", []);
 
-      console.log("Chain ID:", chainId);
 
       const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
       const contract = new ethers.Contract(ContractAddress, Abi, signer);
 
-      console.log(contract);
       return { provider, signer, address, contract, chainId };
     } else {
       throw new Error("MetaMask not found");
@@ -63,19 +61,14 @@ export async function betBull(value) {
   const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
   const contract = new ethers.Contract(ContractAddress, Abi, signer);
 
-  console.log("instance", contract);
   const parsedValue = ethers.utils.parseEther(value);
 
-  console.log("val", parsedValue);
 
-  console.log(value, HARD_CODED_EPOCH, etherValue);
 
   const actual_epoch = await contract.currentEpoch();
 
-  console.log("actual epoch", actual_epoch);
 
   const epoch_in_string = actual_epoch.toString();
-  console.log("in string", epoch_in_string);
 
   const BetBull = await contract.betBull(epoch_in_string, {
     value: parsedValue
@@ -95,19 +88,14 @@ export async function betBear(value) {
   const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
   const contract = new ethers.Contract(ContractAddress, Abi, signer);
 
-  console.log("instance", contract);
   const parsedValue = ethers.utils.parseEther(value);
 
-  console.log("val", parsedValue);
 
-  console.log(value, HARD_CODED_EPOCH, etherValue);
 
   const actual_epoch = await contract.currentEpoch();
 
-  console.log("actual epoch", actual_epoch);
 
   const epoch_in_string = actual_epoch.toString();
-  console.log("in string", epoch_in_string);
 
   const BetBear = await contract.betBear(epoch_in_string, {
     value: parsedValue,
@@ -124,7 +112,6 @@ export async function getRound(value) {
   const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
   const contract = new ethers.Contract(ContractAddress, Abi, signer);
 
-  console.log("instance", contract);
 
 
 

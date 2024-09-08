@@ -51,7 +51,6 @@ const LiveUp = ({ handleFlip }) => {
     galetoOracleAddress: config?.galetoOracleAddress,
   })
 
-  console.log("price",price);
 
   // setRealprice(price.toString())
   const formatPrice = (price) => {
@@ -104,8 +103,7 @@ const [isCalculatingPhase, setIsCalculatingPhase] = useState(false)
 
 const getPriceDifference = (price , lockPrice) => {
 
-  console.log("rpice",price);
-  console.log("lockcprice",lockPrice);
+ 
   if (!price || !lockPrice) {
     return 0
   }
@@ -116,7 +114,7 @@ const [closeTimestamp, setCloseTimestamp] = useState()
 
 const reff1 = setTimeout(() => {
   refresh()
-}, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 1000)
+}, (REFRESH_PRICE_BEFORE_SECONDS_TO_CLOSE) * 5000)
 
   useEffect(() => {
     async function initialize() {
@@ -134,7 +132,6 @@ const reff1 = setTimeout(() => {
 
         const rounds = await contract.rounds(epoch_in_string-1);
 
-        console.log("rounds",rounds);
 
         const totslval= rounds["lockPrice"];
 
@@ -148,16 +145,12 @@ setLockpriceActual(totslval)
 
         setCloseTimestamp(closeTimestamp)
 
-        console.log("pricepool", pricepool.toString());
 
         const r = formatPrice3(pricepool.toString())
 seTpricepool(r);
-        console.log("LOCL",totslval);
-        console.log("LOCK in sigsdf",totslval.toString());
 
         const  val = formatPrice(totslval.toString())
 
-        console.log("val",val);
 
         setLockPrice(val)
 
@@ -171,19 +164,15 @@ const formattedBullMultiplier = bullMultiplier.toFixed(bullMultiplier.isZero() ?
 const formattedBearMultiplier = bearMultiplier.toFixed(bearMultiplier.isZero() ? 0 : 2)
 
 
-console.log("bear", formattedBearMultiplier);
-console.log("bull", formattedBullMultiplier);
+
 
 
 setupval(formattedBullMultiplier)
 
 setDownVal(formattedBearMultiplier)
 
-console.log("data",data);
-console.log("lockprice", val);
-console.log("formateddata",formatPrice(data));
 
-console.log("opdsvdsvsd", formatPrice(data)-val);
+
       } catch (error) {
         console.error("Error initializing contract:", error);
       }
@@ -200,6 +189,7 @@ console.log("opdsvdsvsd", formatPrice(data)-val);
   const isBull = Boolean(lockPrice && price > lockPrice)
   
   const betPosition = isHouse ? BetPosition.HOUSE : isBull ? BetPosition.BULL : BetPosition.BEAR
+
   
   const priceDifference = getPriceDifference(Number(price), lockpriceActual ?? 0)
   // const hasRoundFailed = getHasRoundFailed(round.oracleCalled, round.closeTimestamp, bufferSeconds, round.closePrice)
@@ -221,6 +211,7 @@ console.log("opdsvdsvsd", formatPrice(data)-val);
     }
     return undefined
   }, [refresh, closeTimestamp])
+
 
   return (
     <div>
@@ -260,21 +251,40 @@ console.log("opdsvdsvsd", formatPrice(data)-val);
                 <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(price)}</p>
 
                 {/* <p className=" font-bold text-[#31D0AA] text-base">${formatPrice(realprice)}</p> */}
-                <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="size-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-           {formatPrice(priceDifference)}
-                </div>
+             {
+              formatPrice(priceDifference) >= 0 ?   <div className=" flex items-center bg-[#31D0AA] p-1 px-2 rounded-lg font-semibold text-xs">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+       ${formatPrice(priceDifference)}
+            </div> : <div className=" flex items-center bg-[#ED4B9E] p-1 px-2 rounded-lg font-semibold text-xs">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22V21a.75.75 0 0 1-1.5 0V4.81l-6.22 6.22a.75.75 0 1 1-1.06-1.06l7.5-7.5Z"
+                  clip-rule="evenodd"
+
+                   transform="rotate(180 12 12)"
+                />
+              </svg>
+       ${formatPrice(priceDifference)}
+            </div>
+             }
+          
               </div>
               <div className="pt-2">
                 <div className=" flex justify-between items-center text-xs">
