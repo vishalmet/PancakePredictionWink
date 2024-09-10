@@ -20,7 +20,7 @@ function serializeBigInt(data) {
   return data;
 }
 
-const BSC_MAINNET_RPC_URL = "https://bsc-dataseed.binance.org/";
+const BSC_MAINNET_RPC_URL = "https://bsc-mainnet.infura.io/v3/1b78687936a44910bb82d818d810485d";
 
 export async function initializeContract() {
   try {
