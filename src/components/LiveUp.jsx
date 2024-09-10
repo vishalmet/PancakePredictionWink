@@ -262,7 +262,7 @@ const LiveUp = ({ handleFlip }) => {
               </div>
 
               <div className="flex justify-between items-center">
-                <p className=" font-bold text-[#1FC7D4] text-sm">
+                <p className=" font-bold text-[#1FC7D4] border-b-2 border-[#B0A5C9] border-dotted text-sm">
                   ${formatPrice(price)}
                 </p>
 
