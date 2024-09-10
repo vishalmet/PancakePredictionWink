@@ -123,7 +123,7 @@ const reff1 = setTimeout(() => {
               # {actualEpoch}  
             </div>
           </div>
-          <div className="p-4">
+          <div className="p-3">
             <div className=" text-base font-bold text-center p-1 bg-[#353547] w-[140px] rounded-t-xl mx-auto">
               <p className="text-[#31D0AA] text-base font-extrabold">UP</p>
               <p className="text-[#B0A5C9] text-xs">{upval !== NaN ? upval : 0 }x <span className=" font-medium"> payout</span></p>
