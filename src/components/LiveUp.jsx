@@ -222,7 +222,7 @@ const LiveUp = ({ handleFlip }) => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] border-2 animate-border-pulse shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
+        <div className="bg-[#27262C] border-2 border-y-4 animate-border-pulse shadow-xl h-80 rounded-3xl md:mx-0 w-[240px]">
           <div className="bg-tranparent text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-4xl  border-[#A881FC]">
             {/* <RoundProgress
         variant="flat"
