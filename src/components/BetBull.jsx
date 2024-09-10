@@ -123,7 +123,7 @@ const BetBull = ({ handleFlip }) => {
           <motion.button
             onClick={handleBetBull}
             whileTap={{ scale: 0.9 }}
-            className=" bg-[#31D0AA] hover:bg-[#31D0AA]/80 text-white w-full h-[40px] text-base rounded-md font-bold mb-3"
+            className=" bg-[#1FC7D4] hover:bg-[#1FC7D4]/80 text-white w-full h-[40px] text-base rounded-md font-bold mb-3"
           >
             Confirm
           </motion.button>

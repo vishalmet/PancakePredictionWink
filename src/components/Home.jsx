@@ -102,7 +102,7 @@ const reff1 = setTimeout(() => {
   return (
     <div>
       <div className="flex justify-center items-center pt-10 text-white">
-        <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
+        <div className="bg-[#27262C] shadow-xl h-80 rounded-3xl md:mx-0 w-[240px]">
           <div className="bg-[#A881FC] text-white font-bold p-2 px-4 flex justify-between items-center rounded-t-3xl">
             <div className="flex items-center text-base gap-1">
               <svg
@@ -128,7 +128,7 @@ const reff1 = setTimeout(() => {
               <p className="text-[#31D0AA] text-base font-extrabold">UP</p>
               <p className="text-[#B0A5C9] text-xs">{upval !== NaN ? upval : 0 }x <span className=" font-medium"> payout</span></p>
             </div>
-            <div className="w-full mx-auto border-2 border-[#A881FC] p-4 rounded-xl">
+            <div className="w-full mx-auto border-2 animate-border-pulse p-4 rounded-xl">
               <div className="flex justify-between font-bold text-sm">
                 <p>Prize Pool:</p>
                 <p>{totalVal} BNB</p>

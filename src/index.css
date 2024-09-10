@@ -5,3 +5,10 @@
 .inter-font {
     font-family: "Inter";
   }
+
+  .gradient-border {
+    --border-gradient: linear-gradient(to bottom, #824bb9, #3e8d36);
+    border-image: var(--border-gradient);
+    border-image-slice: 1;
+    border-radius: 10px;
+  }

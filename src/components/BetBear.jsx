@@ -117,7 +117,7 @@ const BetBear = ({ handleFlip }) => {
           <motion.button
             onClick={handleBetBear}
             whileTap={{ scale: 0.9 }}
-            className=" bg-[#ED4B9E] hover:bg-[#ED4B9E]/80 text-white w-full h-[40px] text-base rounded-md font-bold mb-3"
+            className=" bg-[#1FC7D4] hover:bg-[#1FC7D4]/80 text-white w-full h-[40px] text-base rounded-md font-bold mb-3"
           >
             Confirm
           </motion.button>
