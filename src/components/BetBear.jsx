@@ -54,7 +54,7 @@ const BetBear = ({ handleFlip }) => {
 
   return (
     <div className="flex justify-center items-center pt-10">
-      <div className="bg-[#27262C] shadow-xl h-full rounded-3xl md:mx-0 w-[240px]">
+      <div className="bg-[#27262C] shadow-xl h-80 rounded-3xl md:mx-0 w-[240px]">
         <div className="bg-[#3A384C] text-white font-bold p-3 flex justify-between rounded-t-3xl">
           <div className="flex items-center gap-1 text-sm">
             <motion.button
@@ -114,10 +114,11 @@ const BetBear = ({ handleFlip }) => {
               The minimum value should be greater than 0.0001.
             </p>
           )}
+          <div className="pt-10">
           <motion.button
             onClick={handleBetBear}
             whileTap={{ scale: 0.9 }}
-            className=" bg-[#1FC7D4] hover:bg-[#1FC7D4]/80 text-white w-full h-[40px] text-base rounded-md font-bold mb-3"
+            className=" bg-[#1FC7D4] hover:bg-[#1FC7D4]/80 text-black w-full h-[40px] text-base rounded-md font-bold mb-3"
           >
             Confirm
           </motion.button>
@@ -125,6 +126,7 @@ const BetBear = ({ handleFlip }) => {
             You won&apos;t be able to remove or change your position once
             you enter it.
           </p>
+          </div>
         </div>
       </div>
     </div>
