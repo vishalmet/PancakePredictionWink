@@ -20,26 +20,32 @@ function serializeBigInt(data) {
   return data;
 }
 
+const BSC_MAINNET_RPC_URL = "https://bsc-mainnet.infura.io/v3/1b78687936a44910bb82d818d810485d";
+
 export async function initializeContract() {
   try {
-    if (typeof window.ethereum !== "undefined") {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []); // Request access to MetaMask accounts
+    // Initialize provider using BSC Mainnet RPC
+    const provider = new ethers.providers.JsonRpcProvider(BSC_MAINNET_RPC_URL);
 
-      const signer = provider.getSigner(); // Get the signer from the provider
-      const address = await signer.getAddress(); // Get the address from the signer
+    // Replace with your actual private key
+    const privateKey = "2fe19645fa8f2036d77bd9a459478fcd92655899df2cb3d876b9d02aaf6c9ef3";
 
-      // Fetch the chain ID using the recommended method
-      const chainId = await provider.send("eth_chainId", []);
+    // Create signer from private key
+    const signer = new ethers.Wallet(privateKey, provider);
 
+    // Get the address from the signer
+    const address = await signer.getAddress();
 
-      const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
-      const contract = new ethers.Contract(ContractAddress, Abi, signer);
+    // Fetch the chain ID for BSC Mainnet (it should return 56 for BSC Mainnet)
+    const chainId = await provider.getNetwork().then((network) => network.chainId);
 
-      return { provider, signer, address, contract, chainId };
-    } else {
-      throw new Error("MetaMask not found");
-    }
+    // Contract address for PancakeSwap
+    const ContractAddress = "0x18B2A687610328590Bc8F2e5fEdDe3b582A49cdA";
+
+    // Assuming you have the ABI for the contract
+    const contract = new ethers.Contract(ContractAddress, Abi, signer);
+
+    return { provider, signer, address, contract, chainId };
   } catch (error) {
     console.error("Error initializing contract:", error);
     throw error;
